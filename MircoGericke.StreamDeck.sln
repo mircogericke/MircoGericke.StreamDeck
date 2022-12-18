@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MircoGericke.StreamDeck.Connection", "MircoGericke.StreamDeck.Connection\MircoGericke.StreamDeck.Connection.csproj", "{FDEF4ED8-60C5-4B31-B0DC-7FC813E7E8B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MircoGericke.StreamDeck.Hosting", "MircoGericke.StreamDeck.Hosting\MircoGericke.StreamDeck.Hosting.csproj", "{BDFCCBE3-0CBF-4892-BDC5-3A615D0DB51D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MircoGericke.StreamDeck.Plugin", "MircoGericke.StreamDeck.Plugin\MircoGericke.StreamDeck.Plugin.csproj", "{6EBFD65C-3620-4E72-A0FE-3E6D65792B8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{FEC3A998-A0AB-499E-A5FA-D78EF44204CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LowLevelPlugin", "Examples\LowLevelPlugin\LowLevelPlugin.csproj", "{AC415078-EF93-42F3-8181-BACDA59BDE20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighLevelPlugin", "Examples\HighLevelPlugin\HighLevelPlugin.csproj", "{6262A950-FDD4-49BD-B34F-86169BFF57C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDEF4ED8-60C5-4B31-B0DC-7FC813E7E8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDEF4ED8-60C5-4B31-B0DC-7FC813E7E8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDEF4ED8-60C5-4B31-B0DC-7FC813E7E8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDEF4ED8-60C5-4B31-B0DC-7FC813E7E8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDFCCBE3-0CBF-4892-BDC5-3A615D0DB51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDFCCBE3-0CBF-4892-BDC5-3A615D0DB51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDFCCBE3-0CBF-4892-BDC5-3A615D0DB51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDFCCBE3-0CBF-4892-BDC5-3A615D0DB51D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EBFD65C-3620-4E72-A0FE-3E6D65792B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EBFD65C-3620-4E72-A0FE-3E6D65792B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EBFD65C-3620-4E72-A0FE-3E6D65792B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EBFD65C-3620-4E72-A0FE-3E6D65792B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC415078-EF93-42F3-8181-BACDA59BDE20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC415078-EF93-42F3-8181-BACDA59BDE20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC415078-EF93-42F3-8181-BACDA59BDE20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC415078-EF93-42F3-8181-BACDA59BDE20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6262A950-FDD4-49BD-B34F-86169BFF57C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6262A950-FDD4-49BD-B34F-86169BFF57C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6262A950-FDD4-49BD-B34F-86169BFF57C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6262A950-FDD4-49BD-B34F-86169BFF57C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC415078-EF93-42F3-8181-BACDA59BDE20} = {FEC3A998-A0AB-499E-A5FA-D78EF44204CA}
+		{6262A950-FDD4-49BD-B34F-86169BFF57C5} = {FEC3A998-A0AB-499E-A5FA-D78EF44204CA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {055A544B-0C01-48F0-95A9-8BB2893E8131}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+		<PublishTrimmed>true</PublishTrimmed>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Images\**" CopyToOutputDirectory="PreserveNewest"></Content>
+		<Content Include="PropertyInspector\**" CopyToOutputDirectory="PreserveNewest"></Content>
+		<Content Include="manifest.json" CopyToOutputDirectory="PreserveNewest"></Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\MircoGericke.StreamDeck.Hosting\MircoGericke.StreamDeck.Hosting.csproj" />
+	</ItemGroup>
+
+</Project>
