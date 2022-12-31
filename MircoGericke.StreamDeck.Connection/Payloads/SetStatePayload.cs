@@ -2,5 +2,5 @@
 
 internal class SetStatePayload
 {
-    public required uint State { get; init; }
+	public required uint State { get; init; }
 }

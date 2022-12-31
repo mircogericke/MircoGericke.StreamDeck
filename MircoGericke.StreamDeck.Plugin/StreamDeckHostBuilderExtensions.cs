@@ -4,7 +4,6 @@ using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using MircoGericke.StreamDeck.Connection.Model;
 using MircoGericke.StreamDeck.Hosting;
 
 public static class StreamDeckHostBuilderExtensions

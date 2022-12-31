@@ -2,5 +2,5 @@
 
 internal class LogPayload
 {
-    public required string Message { get; init; }
+	public required string Message { get; init; }
 }

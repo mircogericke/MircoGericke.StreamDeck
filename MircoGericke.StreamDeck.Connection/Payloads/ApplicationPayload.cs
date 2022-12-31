@@ -4,6 +4,6 @@ using System.Text.Json.Serialization;
 
 public class ApplicationPayload
 {
-    [JsonPropertyName("application")]
-    public required string Name { get; init; }
+	[JsonPropertyName("application")]
+	public required string Name { get; init; }
 }

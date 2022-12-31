@@ -44,7 +44,7 @@ public class PluginManager : StreamDeckConnection
 
 	private void OnUnhandledDomainException(object sender, UnhandledExceptionEventArgs e)
 	{
-		if(e.ExceptionObject is Exception ex)
+		if (e.ExceptionObject is Exception ex)
 		{
 			logger.LogCritical(ex, "Uncaught Exception in AppDomain.");
 		}

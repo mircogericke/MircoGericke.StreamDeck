@@ -2,5 +2,5 @@
 
 internal class OpenUrlPayload
 {
-    public required string Url { get; init; }
+	public required string Url { get; init; }
 }

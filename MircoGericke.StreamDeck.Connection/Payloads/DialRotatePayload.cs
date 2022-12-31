@@ -10,29 +10,29 @@ using MircoGericke.StreamDeck.Connection.Model;
 /// </summary>
 public class DialRotatePayload
 {
-    /// <summary>
-    /// Controller which issued the event
-    /// </summary>
-    public required string Controller { get; init; }
+	/// <summary>
+	/// Controller which issued the event
+	/// </summary>
+	public required string Controller { get; init; }
 
-    /// <summary>
-    /// Current event settings
-    /// </summary>
-    public required JsonObject Settings { get; init; }
+	/// <summary>
+	/// Current event settings
+	/// </summary>
+	public required JsonObject Settings { get; init; }
 
-    /// <summary>
-    /// Coordinates of key on the stream deck
-    /// </summary>
-    public required KeyCoordinate Coordinates { get; init; }
+	/// <summary>
+	/// Coordinates of key on the stream deck
+	/// </summary>
+	public required KeyCoordinate Coordinates { get; init; }
 
-    /// <summary>
-    /// Number of ticks rotated. Positive is to the right, negative to the left
-    /// </summary>
-    public required int Ticks { get; init; }
+	/// <summary>
+	/// Number of ticks rotated. Positive is to the right, negative to the left
+	/// </summary>
+	public required int Ticks { get; init; }
 
-    /// <summary>
-    /// Boolean whether the dial is currently pressed or not
-    /// </summary>
-    [JsonPropertyName("pressed")]
-    public required bool IsDialPressed { get; init; }
+	/// <summary>
+	/// Boolean whether the dial is currently pressed or not
+	/// </summary>
+	[JsonPropertyName("pressed")]
+	public required bool IsDialPressed { get; init; }
 }

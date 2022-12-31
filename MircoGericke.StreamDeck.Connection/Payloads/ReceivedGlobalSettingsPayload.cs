@@ -7,8 +7,8 @@ using System.Text.Json.Nodes;
 /// </summary>
 public class ReceivedGlobalSettingsPayload
 {
-    /// <summary>
-    /// Global settings object
-    /// </summary>
-    public JsonObject? Settings { get; init; }
+	/// <summary>
+	/// Global settings object
+	/// </summary>
+	public JsonObject? Settings { get; init; }
 }
