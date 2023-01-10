@@ -1,30 +1,29 @@
 {
   "Actions": [
     {
-      "Icon": "Images/icon",
-      "Name": "TODO_ENTER_NAME_OF_ACTION",
+      "Icon": "Assets/action",
+      "Name": "Example Action",
       "States": [
         {
-          "Image": "Images/pluginAction",
+          "Image": "Assets/state",
           "TitleAlignment": "middle",
           "FontSize": "12"
         }
       ],
       "SupportedInMultiActions": false,
-      "Tooltip": "TODO_ENTER_TOOLTIP",
-      "UUID": "LowLevelPlugin.pluginaction",
-      "PropertyInspectorPath": "PropertyInspector/PluginActionPI.html"
+      "Tooltip": "This is an example action to demonstrate the library.",
+      "UUID": "LowLevelPlugin.exampleAction"
     }
   ],
-  "Author": "TODO_ENTER_YOUR_NAME",
+  "Author": "Mirco Gericke",
   "Name": "LowLevelPlugin",
-  "Description": "TODO_ENTER_PLUGIN_DESCRIPTION",
-  "Icon": "Images/pluginIcon",
-  "URL": "TODO_ENTER_YOUR_HOMEPAGE",
+  "Description": "Low level example plugin to demonstrate the library.",
+  "Icon": "Assets/plugin",
+  "URL": "https://github.com/mircogericke/MircoGericke.StreamDeck",
   "Version": "1.0",
   "CodePath": "LowLevelPlugin",
-  "Category": "Custom",
-  "CategoryIcon": "Images/categoryIcon",
+  "Category": "Low Level Plugin",
+  "CategoryIcon": "Assets/category",
   "OS": [
     {
       "Platform": "windows",
