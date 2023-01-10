@@ -1,13 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<Content Include="Actions\**" CopyToOutputDirectory="PreserveNewest"></Content>
+		<Content Include="Assets\**" CopyToOutputDirectory="PreserveNewest"></Content>
+		<Content Include="manifest.json" CopyToOutputDirectory="PreserveNewest"></Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+	  <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+	  <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
+	</ItemGroup>
+	
+	<ItemGroup>
     <ProjectReference Include="..\..\MircoGericke.StreamDeck.Plugin\MircoGericke.StreamDeck.Plugin.csproj" />
   </ItemGroup>
 

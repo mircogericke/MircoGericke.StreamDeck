@@ -1,0 +1,38 @@
+{
+  "Actions": [
+    {
+      "Icon": "Actions/Counter/action",
+      "Name": "Counter",
+      "States": [
+        {
+          "Image": "Actions/Counter/state",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "This action increases the displayed counter when pressed.",
+      "UUID": "HighLevelPlugin.Counter",
+      "PropertyInspectorPath": "Actions/Counter/PI.html"
+    }
+  ],
+  "Author": "Mirco Gericke",
+  "Name": "HighLevelPlugin",
+  "Description": "High level example plugin to demonstrate the library.",
+  "Icon": "Assets/plugin",
+  "URL": "https://github.com/mircogericke/MircoGericke.StreamDeck",
+  "Version": "1.0",
+  "CodePath": "HighLevelPlugin",
+  "Category": "High Level Plugin",
+  "CategoryIcon": "Assets/category",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "4.9"
+  }
+}
