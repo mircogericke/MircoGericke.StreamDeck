@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using MircoGericke.StreamDeck.Connection.Payloads;
 
-internal class OpenUrlMessage : StreamDeckMessage<OpenUrlPayload>
+public class OpenUrlMessage : StreamDeckMessage<OpenUrlPayload>
 {
 	public override string Event => "openUrl";
 

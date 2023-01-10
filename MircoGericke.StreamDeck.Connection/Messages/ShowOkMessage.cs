@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Messages;
 
-internal class ShowOkMessage : PluginMessage
+public class ShowOkMessage : ContextMessage
 {
 	public override string Event => "showOk";
 }

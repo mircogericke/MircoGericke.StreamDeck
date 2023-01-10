@@ -1,9 +1,13 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Messages;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
-internal class SendToPropertyInspectorMessage : PluginMessage<JsonObject>
+using MircoGericke.StreamDeck.Connection.Model;
+
+public class SendToPropertyInspectorMessage : ContextMessage<JsonObject>
 {
 	public override string Event => "sendToPropertyInspector";
 
-	public required string Action { get; init; }
+	[JsonPropertyName("action")]
+	public required ActionId ActionId { get; init; }
 }

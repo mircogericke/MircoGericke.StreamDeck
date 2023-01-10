@@ -3,7 +3,7 @@
 using MircoGericke.StreamDeck.Connection.Model;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-sealed class ActionIdAttribute : Attribute
+public sealed class ActionIdAttribute : Attribute
 {
 	public ActionIdAttribute(string id)
 	{

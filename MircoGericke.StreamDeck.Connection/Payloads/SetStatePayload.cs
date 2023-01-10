@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Payloads;
 
-internal class SetStatePayload
+public class SetStatePayload
 {
 	public required uint State { get; init; }
 }

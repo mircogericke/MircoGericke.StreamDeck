@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Messages;
 
-internal class ShowAlertMessage : PluginMessage
+public class ShowAlertMessage : ContextMessage
 {
 	public override string Event => "showAlert";
 }

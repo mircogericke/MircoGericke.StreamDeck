@@ -1,9 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace MircoGericke.StreamDeck.Connection.Messages;
+
+using System.Diagnostics.CodeAnalysis;
 
 using MircoGericke.StreamDeck.Connection.Payloads;
 
-namespace MircoGericke.StreamDeck.Connection.Messages;
-internal class LogMessage : StreamDeckMessage<LogPayload>
+public class LogMessage : StreamDeckMessage<LogPayload>
 {
 	public override string Event => "logMessage";
 

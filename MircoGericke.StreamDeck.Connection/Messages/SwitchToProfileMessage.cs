@@ -1,8 +1,13 @@
-﻿using MircoGericke.StreamDeck.Connection.Payloads;
+﻿using System.Text.Json.Serialization;
+
+using MircoGericke.StreamDeck.Connection.Model;
+using MircoGericke.StreamDeck.Connection.Payloads;
 
 namespace MircoGericke.StreamDeck.Connection.Messages;
-internal class SwitchToProfileMessage : PluginMessage<SwitchToProfilePayload>
+public class SwitchToProfileMessage : ContextMessage<SwitchToProfilePayload>
 {
 	public override string Event => "switchToProfile";
-	public required string Device { get; init; }
+
+	[JsonPropertyName("device")]
+	public required DeviceId DeviceId { get; init; }
 }

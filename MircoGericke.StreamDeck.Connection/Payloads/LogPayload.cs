@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Payloads;
 
-internal class LogPayload
+public class LogPayload
 {
 	public required string Message { get; init; }
 }

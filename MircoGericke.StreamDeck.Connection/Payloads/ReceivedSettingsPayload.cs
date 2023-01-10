@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Payloads;
 
-using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json.Nodes;
 
 using MircoGericke.StreamDeck.Connection.Model;
 
@@ -12,7 +12,7 @@ public class ReceivedSettingsPayload
 	/// <summary>
 	/// Action's settings
 	/// </summary>
-	public JSObject? Settings { get; init; }
+	public JsonObject? Settings { get; init; }
 	public required KeyCoordinate Coordinates { get; init; }
 	public required bool IsInMultiAction { get; init; }
 }

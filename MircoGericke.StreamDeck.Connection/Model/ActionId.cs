@@ -16,10 +16,10 @@ public readonly struct ActionId : IEquatable<ActionId>
 	}
 
 	public override string ToString() => value;
-	public override int GetHashCode() => value.GetHashCode();
+	public override int GetHashCode() => value.GetHashCode(StringComparison.OrdinalIgnoreCase);
 	public override bool Equals(object? obj) => (obj is ActionId other && Equals(other)) || base.Equals(obj);
 
-	public bool Equals(ActionId other) => Equals(value, other.value);
+	public bool Equals(ActionId other) => value.Equals(other.value, StringComparison.OrdinalIgnoreCase);
 
 	public static bool operator ==(ActionId first, ActionId second) => first.Equals(second);
 	public static bool operator !=(ActionId first, ActionId second) => !first.Equals(second);

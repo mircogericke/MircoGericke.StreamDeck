@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Messages;
 
-internal class RegisterEventMessage : StreamDeckMessage
+public class RegisterEventMessage : StreamDeckMessage
 {
 	public override string Event { get; }
 	public string Uuid { get; }

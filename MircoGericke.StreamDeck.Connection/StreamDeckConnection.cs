@@ -127,12 +127,12 @@ public class StreamDeckConnection : IHostedService, IDisposable
 	};
 
 	/// <summary>
-	/// Called when plugin is connected to stream deck app
+	/// Called after the websocket connection is opened
 	/// </summary>
 	protected virtual Task OnConnected(EventArgs e, CancellationToken cancellationToken) => Task.CompletedTask;
 
 	/// <summary>
-	/// Called when plugin is disconnected from stream deck app
+	/// Called after the websocket connection is closed
 	/// </summary>
 	protected virtual Task OnDisconnected(EventArgs e, CancellationToken cancellationToken) => Task.CompletedTask;
 
@@ -236,131 +236,8 @@ public class StreamDeckConnection : IHostedService, IDisposable
 	}
 	#endregion
 
-	#region Requests
-	protected ValueTask SendAsync(StreamDeckMessage message, CancellationToken cancellationToken = default)
+	public ValueTask SendAsync(StreamDeckMessage message, CancellationToken cancellationToken = default)
 		=> sendingChannel.Writer.WriteAsync(message, cancellationToken);
-
-	public ValueTask SetTitleAsync(string title, string context, SdkTarget target, int? state)
-	{
-		return SendAsync(new SetTitleMessage
-		{
-			Context = context,
-			Payload = new()
-			{
-				Title = title,
-				Target = target,
-				State = state,
-			}
-		});
-	}
-
-	public ValueTask LogMessageAsync(string message) => SendAsync(new LogMessage(message));
-
-	public ValueTask SetImageAsync(string base64Image, string context, SdkTarget target, int? state)
-	{
-		return SendAsync(new SetImageMessage()
-		{
-			Context = context,
-			Payload = new()
-			{
-				Image = base64Image,
-				Target = target,
-				State = state,
-			}
-		});
-	}
-
-	public ValueTask ShowAlertAsync(string context)
-	{
-		return SendAsync(new ShowAlertMessage
-		{
-			Context = context,
-		});
-	}
-
-	public ValueTask ShowOkAsync(string context)
-	{
-		return SendAsync(new ShowOkMessage
-		{
-			Context = context
-		});
-	}
-
-	public ValueTask SetGlobalSettingsAsync(JsonObject settings)
-	{
-		return SendAsync(new SetGlobalSettingsMessage
-		{
-			Context = options.Uuid,
-			Payload = settings,
-		});
-	}
-
-	public ValueTask GetGlobalSettingsAsync()
-	{
-		return SendAsync(new GetGlobalSettingsMessage
-		{
-			Context = options.Uuid,
-		});
-	}
-
-	public ValueTask SetSettingsAsync(JsonObject settings, string context)
-	{
-		return SendAsync(new SetSettingsMessage
-		{
-			Context = context,
-			Payload = settings,
-		});
-	}
-
-	public ValueTask GetSettingsAsync(string context)
-	{
-		return SendAsync(new GetSettingsMessage
-		{
-			Context = context,
-		});
-	}
-
-	public ValueTask SetStateAsync(uint state, string context)
-	{
-		return SendAsync(new SetStateMessage
-		{
-			Context = context,
-			Payload = new() { State = state },
-		});
-	}
-
-	public ValueTask SendToPropertyInspectorAsync(string action, JsonObject data, string context)
-	{
-		return SendAsync(new SendToPropertyInspectorMessage
-		{
-			Context = context,
-			Action = action,
-			Payload = data,
-		});
-	}
-
-	public ValueTask SwitchToProfileAsync(string device, string profileName, string context)
-	{
-		return SendAsync(new SwitchToProfileMessage
-		{
-			Context = context,
-			Device = device,
-			Payload = new() { Profile = profileName }
-		});
-	}
-
-	public ValueTask OpenUrlAsync(Uri uri) => SendAsync(new OpenUrlMessage(uri));
-
-	public ValueTask SetFeedbackAsync(Dictionary<string, string> dictKeyValues, string context)
-	{
-		return SendAsync(new SetFeedbackMessage
-		{
-			Context = context,
-			Payload = dictKeyValues,
-		});
-	}
-
-	#endregion
 
 	protected virtual void Dispose(bool disposing)
 	{

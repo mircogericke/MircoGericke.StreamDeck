@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Payloads;
 
-internal class OpenUrlPayload
+public class OpenUrlPayload
 {
 	public required string Url { get; init; }
 }

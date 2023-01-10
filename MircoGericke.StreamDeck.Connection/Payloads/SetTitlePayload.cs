@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 using MircoGericke.StreamDeck.Connection.Model;
 
-internal class SetTitlePayload
+public class SetTitlePayload
 {
 	public required string Title { get; init; }
 

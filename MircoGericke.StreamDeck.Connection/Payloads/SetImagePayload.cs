@@ -4,9 +4,10 @@ using System.Text.Json.Serialization;
 
 using MircoGericke.StreamDeck.Connection.Model;
 
-internal class SetImagePayload
+public class SetImagePayload
 {
-	public required string Image { get; init; }
+	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+	public string? Image { get; init; }
 	public required SdkTarget Target { get; init; }
 
 	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

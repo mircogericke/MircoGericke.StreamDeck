@@ -1,6 +1,6 @@
 ﻿namespace MircoGericke.StreamDeck.Connection.Messages;
 
-internal class GetGlobalSettingsMessage : PluginMessage
+public class GetGlobalSettingsMessage : ContextMessage
 {
 	public override string Event => "getGlobalSettings";
 }

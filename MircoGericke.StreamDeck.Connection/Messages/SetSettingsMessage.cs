@@ -2,7 +2,7 @@
 
 using System.Text.Json.Nodes;
 
-internal class SetSettingsMessage : PluginMessage<JsonObject>
+public class SetSettingsMessage : ContextMessage<JsonObject>
 {
 	public override string Event => "setSettings";
 }
