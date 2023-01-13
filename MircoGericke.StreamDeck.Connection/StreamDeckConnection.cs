@@ -21,7 +21,7 @@ public class StreamDeckConnection : IHostedService, IDisposable
 
 	private CancellationTokenSource? cts;
 	private Task<StreamDeckSocket>? keepAliveTask;
-	private bool disposedValue;
+	private bool isDisposed;
 
 	private readonly Channel<StreamDeckMessage> sendingChannel = Channel.CreateUnbounded<StreamDeckMessage>(new()
 	{
@@ -239,21 +239,16 @@ public class StreamDeckConnection : IHostedService, IDisposable
 	public ValueTask SendAsync(StreamDeckMessage message, CancellationToken cancellationToken = default)
 		=> sendingChannel.Writer.WriteAsync(message, cancellationToken);
 
-	protected virtual void Dispose(bool disposing)
-	{
-		if (!disposedValue)
-		{
-			if (disposing)
-			{
-				cts?.Dispose();
-			}
-			disposedValue = true;
-		}
-	}
+	protected virtual void DisposeManaged()
+		=> cts?.Dispose();
 
 	public void Dispose()
 	{
-		Dispose(disposing: true);
+		if (isDisposed)
+			return;
+
+		DisposeManaged();
+		isDisposed = true;
 		GC.SuppressFinalize(this);
 	}
 }

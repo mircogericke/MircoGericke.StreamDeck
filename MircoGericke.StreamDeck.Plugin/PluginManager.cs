@@ -35,13 +35,10 @@ public class PluginManager : StreamDeckConnection
 		AppDomain.CurrentDomain.UnhandledException += OnUnhandledDomainException;
 	}
 
-	protected override void Dispose(bool disposing)
+	protected override void DisposeManaged()
 	{
-		base.Dispose(disposing);
-		if (disposing)
-		{
-			AppDomain.CurrentDomain.UnhandledException -= OnUnhandledDomainException;
-		}
+		base.DisposeManaged();
+		AppDomain.CurrentDomain.UnhandledException -= OnUnhandledDomainException;
 	}
 
 	private void OnUnhandledDomainException(object sender, UnhandledExceptionEventArgs e)
@@ -52,7 +49,7 @@ public class PluginManager : StreamDeckConnection
 		}
 		else
 		{
-			logger.LogCritical("Uncaught Exception in AppDomain: {@exceptin}.", e.ExceptionObject);
+			logger.LogCritical("Uncaught Exception in AppDomain: {@exception}.", e.ExceptionObject);
 		}
 	}
 
@@ -78,9 +75,6 @@ public class PluginManager : StreamDeckConnection
 	private ContextDescriptor CreateContext(ContextId contextId, ActionId actionId, DeviceId deviceId)
 	{
 		var scope = scopeFactory.CreateScope();
-
-
-		var context0 = scope.ServiceProvider.GetRequiredService<IActionContext>();
 
 		if (scope.ServiceProvider.GetRequiredService<IActionContext>() is ActionContext context)
 		{
