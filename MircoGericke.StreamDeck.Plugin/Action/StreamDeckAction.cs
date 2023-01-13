@@ -15,7 +15,7 @@ public abstract partial class StreamDeckAction : IStreamDeckAction
 	}
 
 	public virtual Task InitializeAsync(AppearancePayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
-	public virtual Task OnDidReceiveGlboalSettings(ReceivedGlobalSettingsPayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
+	public virtual Task OnDidReceiveGlobalSettings(ReceivedGlobalSettingsPayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
 	public virtual Task OnDidReceiveSettings(ReceivedSettingsPayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
 	public virtual Task OnRpc(JsonObject payload, CancellationToken cancellationToken) => Task.CompletedTask;
 
