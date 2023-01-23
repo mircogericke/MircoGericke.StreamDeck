@@ -36,10 +36,10 @@ public class CounterAction : StreamDeckAction, IKeypadAction
 	) : base(context)
 	{
 		this.logger = logger;
-		defaultImage = LoadImage();
+		defaultImage = LoadDefaultStateImage();
 	}
 
-	public override Task InitializeAsync(AppearancePayload payload, CancellationToken cancellationToken)
+	public override Task OnWillAppear(AppearancePayload payload, CancellationToken cancellationToken)
 	{
 		logger.LogWarning("Initialize {payload}", JsonSerializer.Serialize(payload));
 		settings = payload.Settings.Deserialize<CounterSettings>() ?? settings;
@@ -86,7 +86,13 @@ public class CounterAction : StreamDeckAction, IKeypadAction
 	{
 	}
 
-	private static Image<Rgba32> LoadImage()
+	protected override void DisposedManaged()
+	{
+		base.DisposedManaged();
+		defaultImage?.Dispose();
+	}
+
+	private static Image<Rgba32> LoadDefaultStateImage()
 	{
 		var baseDir = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!;
 		var imgPath = Path.Combine(baseDir, "Actions", "Counter", "state@2x.png");
