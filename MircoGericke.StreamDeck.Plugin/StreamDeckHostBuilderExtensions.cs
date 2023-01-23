@@ -32,7 +32,7 @@ public static class StreamDeckHostBuilderExtensions
 
 	public static StreamDeckHostBuilder UseAction(this StreamDeckHostBuilder host, Type actionType, ActionId actionId)
 	{
-		if (!actionType.IsAssignableTo(typeof(StreamDeckAction)))
+		if (!actionType.IsAssignableTo(typeof(IStreamDeckAction)))
 			throw new NotSupportedException($"Type {actionType} is not compatible with type {typeof(StreamDeckAction)}.");
 
 		var descriptor = new ActionDescriptor
@@ -53,7 +53,7 @@ public static class StreamDeckHostBuilderExtensions
 
 		var actions = assembly
 			.GetTypes()
-			.Where(type => type.IsAssignableTo(typeof(StreamDeckAction)))
+			.Where(type => type.IsAssignableTo(typeof(IStreamDeckAction)))
 			.Select(type => (type, attr: type.GetCustomAttribute<ActionIdAttribute>()))
 			.Where(v => v.attr is not null);
 

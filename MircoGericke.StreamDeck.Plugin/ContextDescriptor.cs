@@ -4,8 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 using MircoGericke.StreamDeck.Plugin.Action;
 
-internal class ContextDescriptor
+internal sealed class ContextDescriptor : IDisposable
 {
     public required IServiceScope Scope { get; init; }
-    public required StreamDeckAction Instance { get; init; }
+    public required IStreamDeckAction Instance { get; init; }
+
+	public void Dispose()
+  {
+    Instance?.Dispose();
+    Scope?.Dispose();
+  }
 }

@@ -53,23 +53,23 @@ public class PluginManager : StreamDeckConnection
 		}
 	}
 
-	private StreamDeckAction Instantiate(IServiceScope scope, ActionId id)
+	private IStreamDeckAction Instantiate(IServiceScope scope, ActionId id)
 	{
-		if (!descriptors.TryGetValue(id, out var desc))
+		if (!descriptors.TryGetValue(id, out var descriptor))
 		{
 			logger.LogError("Could not find descriptor for action {actionId}.", id);
 			return StreamDeckAction.Missing;
 		}
 
-		var value = scope.ServiceProvider.GetService(desc.Type);
+		var value = scope.ServiceProvider.GetService(descriptor.Type);
 
-		if (value is not StreamDeckAction act)
+		if (value is not IStreamDeckAction action)
 		{
-			logger.LogError("Could not instantiate {@descriptor}.", desc);
+			logger.LogError("Could not instantiate {@descriptor}.", descriptor);
 			return StreamDeckAction.Missing;
 		}
 
-		return act;
+		return action;
 	}
 
 	private ContextDescriptor CreateContext(ContextId contextId, ActionId actionId, DeviceId deviceId)
@@ -96,13 +96,13 @@ public class PluginManager : StreamDeckConnection
 		};
 	}
 
-	private StreamDeckAction GetOrAdd(ContextEvent e)
+	private IStreamDeckAction GetOrAdd(ContextEvent e)
 	{
 		var descriptor = instances.GetOrAdd(e.ContextId, _ => CreateContext(e.ContextId, e.ActionId, e.DeviceId));
 		return descriptor.Instance;
 	}
 
-	private StreamDeckAction? TryGet(ActionEvent e)
+	private IStreamDeckAction? TryGet(ActionEvent e)
 	{
 		if (instances.TryGetValue(e.ContextId, out var descriptor))
 			return descriptor.Instance;
@@ -110,32 +110,41 @@ public class PluginManager : StreamDeckConnection
 	}
 
 	protected override Task OnWillAppear(WillAppearEvent e, CancellationToken cancellationToken)
-		=> GetOrAdd(e).InitializeAsync(e.Payload, cancellationToken);
+		=> GetOrAdd(e).OnWillAppear(e.Payload, cancellationToken);
 
 	protected async override Task OnWillDisappear(WillDisappearEvent e, CancellationToken cancellationToken)
 	{
 		if (instances.TryRemove(e.ContextId, out var descriptor))
 		{
-			await descriptor.Instance.DisposeAsync().ConfigureAwait(false);
-			descriptor.Scope.Dispose();
+			await descriptor.Instance.OnWillDisappear(e.Payload, cancellationToken);
+			descriptor.Dispose();
 		}
 	}
 
 	protected override Task OnApplicationDidLaunch(ApplicationDidLaunchEvent e, CancellationToken cancellationToken) => base.OnApplicationDidLaunch(e, cancellationToken);
 	protected override Task OnApplicationDidTerminate(ApplicationDidTerminateEvent e, CancellationToken cancellationToken) => base.OnApplicationDidTerminate(e, cancellationToken);
 
-	protected override Task OnConnected(EventArgs e, CancellationToken cancellationToken) => base.OnConnected(e, cancellationToken);
-	protected override Task OnDisconnected(EventArgs e, CancellationToken cancellationToken) => base.OnDisconnected(e, cancellationToken);
+	//protected override Task OnConnected(EventArgs e, CancellationToken cancellationToken) => base.OnConnected(e, cancellationToken);
+	//protected override Task OnDisconnected(EventArgs e, CancellationToken cancellationToken) => base.OnDisconnected(e, cancellationToken);
 
 	protected override Task OnDeviceDidConnect(DeviceDidConnectEvent e, CancellationToken cancellationToken) => base.OnDeviceDidConnect(e, cancellationToken);
-
 	protected override Task OnDeviceDidDisconnect(DeviceDidDisconnectEvent e, CancellationToken cancellationToken) => base.OnDeviceDidDisconnect(e, cancellationToken);
 
 	protected override Task OnDialPress(DialPressEvent e, CancellationToken cancellationToken) => base.OnDialPress(e, cancellationToken);
 
 	protected override Task OnDialRotate(DialRotateEvent e, CancellationToken cancellationToken) => base.OnDialRotate(e, cancellationToken);
-	protected override Task OnDidReceiveGlobalSettings(DidReceiveGlobalSettingsEvent e, CancellationToken cancellationToken) => base.OnDidReceiveGlobalSettings(e, cancellationToken);
-	protected override Task OnDidReceiveSettings(DidReceiveSettingsEvent e, CancellationToken cancellationToken) => GetOrAdd(e).OnDidReceiveSettings(e.Payload, cancellationToken);
+
+	protected override async Task OnDidReceiveGlobalSettings(DidReceiveGlobalSettingsEvent e, CancellationToken cancellationToken)
+	{
+		var tasks = instances
+			.Select(v => v.Value.Instance)
+			.Select(v => v.OnDidReceiveGlobalSettings(e.Payload, cancellationToken));
+
+		await Task.WhenAll(tasks).ConfigureAwait(false);
+	}
+
+	protected override Task OnDidReceiveSettings(DidReceiveSettingsEvent e, CancellationToken cancellationToken)
+		=> GetOrAdd(e).OnDidReceiveSettings(e.Payload, cancellationToken);
 
 	protected override Task OnKeyDown(KeyDownEvent e, CancellationToken cancellationToken)
 	{
@@ -155,9 +164,15 @@ public class PluginManager : StreamDeckConnection
 		return Task.CompletedTask;
 	}
 
-	protected override Task OnPropertyInspectorDidAppear(PropertyInspectorDidAppearEvent e, CancellationToken cancellationToken) => base.OnPropertyInspectorDidAppear(e, cancellationToken);
-	protected override Task OnPropertyInspectorDidDisappear(PropertyInspectorDidDisappearEvent e, CancellationToken cancellationToken) => base.OnPropertyInspectorDidDisappear(e, cancellationToken);
-	protected override Task OnSendToPlugin(SendToPluginEvent e, CancellationToken cancellationToken) => TryGet(e)?.OnRpc(e.Payload, cancellationToken) ?? Task.CompletedTask;
+	protected override Task OnPropertyInspectorDidAppear(PropertyInspectorDidAppearEvent e, CancellationToken cancellationToken)
+		=> GetOrAdd(e).OnPropertyInspectorDidAppear(cancellationToken);
+
+	protected override Task OnPropertyInspectorDidDisappear(PropertyInspectorDidDisappearEvent e, CancellationToken cancellationToken)
+		=> GetOrAdd(e).OnPropertyInspectorDidDisappear(cancellationToken);
+
+	protected override Task OnSendToPlugin(SendToPluginEvent e, CancellationToken cancellationToken)
+		=> TryGet(e)?.OnRpc(e.Payload, cancellationToken) ?? Task.CompletedTask;
+
 	protected override Task OnSystemDidWakeUp(SystemDidWakeUpEvent e, CancellationToken cancellationToken) => base.OnSystemDidWakeUp(e, cancellationToken);
 	protected override Task OnTitleParametersDidChange(TitleParametersDidChangeEvent e, CancellationToken cancellationToken) => base.OnTitleParametersDidChange(e, cancellationToken);
 	protected override Task OnTouchTap(TouchTapEvent e, CancellationToken cancellationToken) => base.OnTouchTap(e, cancellationToken);

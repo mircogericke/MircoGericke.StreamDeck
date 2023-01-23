@@ -14,35 +14,28 @@ public abstract partial class StreamDeckAction : IStreamDeckAction
 		Context = context;
 	}
 
-	public virtual Task InitializeAsync(AppearancePayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
+	public virtual Task OnWillAppear(AppearancePayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
+	public virtual Task OnWillDisappear(AppearancePayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
+
 	public virtual Task OnDidReceiveGlobalSettings(ReceivedGlobalSettingsPayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
 	public virtual Task OnDidReceiveSettings(ReceivedSettingsPayload payload, CancellationToken cancellationToken) => Task.CompletedTask;
 	public virtual Task OnRpc(JsonObject payload, CancellationToken cancellationToken) => Task.CompletedTask;
 
-	#region (async) disposable
-	private bool disposedValue;
+	#region disposable
+	private bool isDisposed;
 
-	protected virtual void DisposeCore(bool disposeManaged)
-	{
-		if (!disposedValue)
-		{
-			disposedValue = true;
-		}
-	}
-
-	protected virtual ValueTask DisposeAsyncCore() => ValueTask.CompletedTask;
+	protected virtual void DisposeUnmanaged() { }
+	protected virtual void DisposedManaged() { }
 
 	public void Dispose()
 	{
-		DisposeCore(disposeManaged: true);
-		GC.SuppressFinalize(this);
-	}
+		if (isDisposed)
+			return;
 
-	public async ValueTask DisposeAsync()
-	{
-		await DisposeAsyncCore().ConfigureAwait(false);
-		DisposeCore(disposeManaged: false);
+		DisposedManaged();
+		DisposeUnmanaged();
 		GC.SuppressFinalize(this);
+		isDisposed = true;
 	}
 	#endregion
 }
