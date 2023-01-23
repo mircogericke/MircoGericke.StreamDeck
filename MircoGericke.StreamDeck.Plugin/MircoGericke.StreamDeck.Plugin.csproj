@@ -1,14 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
+		<VersionSuffix Condition="'$(Configuration)' == 'Debug'">debug</VersionSuffix>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MircoGericke.StreamDeck.Connection\MircoGericke.StreamDeck.Connection.csproj" />
-    <ProjectReference Include="..\MircoGericke.StreamDeck.Hosting\MircoGericke.StreamDeck.Hosting.csproj" />
-  </ItemGroup>
+	<!-- Nuget Configuration-->
+	<PropertyGroup>
+		<Authors>MircoGericke</Authors>
+		<RepositoryUrl>https://github.com/mircogericke/MircoGericke.StreamDeck</RepositoryUrl>
+		<PackageTags>Elgato;StreamDeck;Stream;Deck;Plugin;Toolkit</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>logo.png</PackageIcon>
+	</PropertyGroup>
 
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MircoGericke.StreamDeck.Connection\MircoGericke.StreamDeck.Connection.csproj" />
+		<ProjectReference Include="..\MircoGericke.StreamDeck.Hosting\MircoGericke.StreamDeck.Hosting.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Include="../logo.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
 </Project>
